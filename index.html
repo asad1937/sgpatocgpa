@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGPA to CGPA Converter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+        }
+
+        .container {
+            background: #fff;
+            color: #333;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .container p {
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        button {
+            background: #2575fc;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #1e5bcc;
+        }
+
+        .result {
+            margin-top: 24px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .article {
+            text-align: left;
+            margin-top: 24px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .article h2 {
+            font-size: 20px;
+            margin-top: 16px;
+        }
+
+        .article ul {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .article ul li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SGPA to CGPA Converter</h1>
+        <p>Calculate your CGPA easily by entering your SGPA scores for each semester.</p>
+        <form id="converter-form">
+            <div class="form-group">
+                <label for="sgpa">Enter SGPA (comma-separated for multiple semesters):</label>
+                <input type="text" id="sgpa" placeholder="e.g., 3.5, 3.8, 3.9">
+            </div>
+            <button type="button" onclick="convertToCGPA()">Convert</button>
+        </form>
+        <div id="result" class="result"></div>
+
+        <div class="article">
+            <h2>Understanding SGPA and CGPA</h2>
+            <p> <a href="https://cgpatopercentagetool.com/sgpa-to-cgpa/"> SGPA and CGPA </a> are essential metrics used in academia to evaluate a student's performance. While SGPA measures performance in a specific semester, CGPA provides an overall measure across multiple semesters.</p>
+
+            <h2>Why is CGPA Important?</h2>
+            <p>CGPA plays a crucial role in shaping a student's academic and professional future. Many universities and employers consider CGPA as a standard for admissions, scholarships, and job eligibility. A consistent CGPA reflects dedication and consistent performance.</p>
+
+            <h2>How to Calculate CGPA from SGPA?</h2>
+            <p>The process to convert SGPA to CGPA is straightforward. Follow these steps:</p>
+            <ul>
+                <li>Add up the SGPA of all completed semesters.</li>
+                <li>Divide the total by the number of semesters.</li>
+                <li>The result is your CGPA.</li>
+            </ul>
+
+            <h2>Use Our SGPA to CGPA Converter</h2>
+            <p>This tool simplifies the calculation. Just enter your SGPA scores separated by commas, and let the converter do the math for you. It's fast, accurate, and user-friendly!</p>
+
+            <h2>Tips for Improving Your CGPA</h2>
+            <p>Consistency is key. Here are some tips to enhance your academic performance:</p>
+            <ul>
+                <li>Plan your study schedule effectively.</li>
+                <li>Focus on understanding concepts rather than rote learning.</li>
+                <li>Seek help from professors and peers when needed.</li>
+                <li>Stay organized and manage your time wisely.</li>
+            </ul>
+
+            <p>With these strategies and tools like our SGPA to CGPA converter, achieving academic excellence becomes much more manageable!</p>
+        </div>
+    </div>
+
+    <script>
+        function convertToCGPA() {
+            const sgpaInput = document.getElementById('sgpa').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!sgpaInput.trim()) {
+                resultDiv.textContent = 'Please enter SGPA values.';
+                return;
+            }
+
+            const sgpaArray = sgpaInput.split(',').map(Number);
+
+            if (sgpaArray.some(isNaN)) {
+                resultDiv.textContent = 'Invalid input. Please enter numeric values separated by commas.';
+                return;
+            }
+
+            const sum = sgpaArray.reduce((acc, val) => acc + val, 0);
+            const cgpa = (sum / sgpaArray.length).toFixed(2);
+
+            resultDiv.textContent = `Your CGPA is: ${cgpa}`;
+        }
+    </script>
+</body>
+</html>
